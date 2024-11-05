@@ -63,22 +63,9 @@ function showRelatedPoems(poem) {
     }
 }
 
-// 标记诗词为已背诵
-function markAsRecited(poem) {
-    let recitedPoems = JSON.parse(localStorage.getItem("recited_poems") || "[]");
-    if (!recitedPoems.find(p => p.title === poem.title)) {
-        recitedPoems.push(poem);
-        localStorage.setItem("recited_poems", JSON.stringify(recitedPoems));
-        alert("已标记为已背诵！");
-    } else {
-        alert("这首诗已经被标记为已背诵。");
-    }
-    getRecitationStats();
-}
-
 // 显示背诵进度分析
 function getRecitationStats() {
-    const recitedPoems = JSON.parse(localStorage.getItem("recited_poems") || "[]");
+    const recitedPoems = poems;
     const stats = recitedPoems.reduce((acc, poem) => {
         acc[poem.dynasty] = (acc[poem.dynasty] || 0) + 1;
         return acc;
@@ -93,7 +80,7 @@ function getRecitationStats() {
 
 // 显示主题分布分析
 function getThemeDistribution() {
-    const recitedPoems = JSON.parse(localStorage.getItem("recited_poems") || "[]");
+    const recitedPoems = poems;
     const themeStats = recitedPoems.reduce((acc, poem) => {
         poem.themes.forEach(theme => {
             acc[theme] = (acc[theme] || 0) + 1;
