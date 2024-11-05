@@ -3,13 +3,20 @@ let authors = [];
 
 // 加载诗词和诗人数据
 async function loadData() {
-    const poemResponse = await fetch('data/poems.json');
-    poems = await poemResponse.json();
-    
-    const authorResponse = await fetch('data/authors.json');
-    authors = await authorResponse.json();
-    
-    displayPoemList();
+    try {
+        const poemResponse = await fetch('data/poems.json');
+        poems = await poemResponse.json();
+        
+        const authorResponse = await fetch('data/authors.json');
+        authors = await authorResponse.json();
+        
+        displayPoemList();
+        getRecitationStats();
+        getThemeDistribution();
+    } catch (error) {
+        console.error("加载数据时出错:", error);
+        alert("无法加载数据，请稍后重试。");
+    }
 }
 
 // 显示诗词列表
@@ -34,7 +41,6 @@ function showPoemDetails(poem) {
     `;
     showAuthorDetails(poem.author);
     showRelatedPoems(poem);
-    details.innerHTML += `<button onclick="markAsRecited(${JSON.stringify(poem)})">标记为已背诵</button>`;
     details.hidden = false;
 }
 
@@ -63,36 +69,34 @@ function showRelatedPoems(poem) {
     }
 }
 
-// 显示背诵进度分析
+// 背诵进度分析
 function getRecitationStats() {
-    const recitedPoems = poems;
-    const stats = recitedPoems.reduce((acc, poem) => {
+    const stats = poems.reduce((acc, poem) => {
         acc[poem.dynasty] = (acc[poem.dynasty] || 0) + 1;
         return acc;
     }, {});
-    let statsHtml = "<h3>背诵进度（按朝代）</h3><ul>";
-    for (const dynasty in stats) {
-        statsHtml += `<li>${dynasty}: ${stats[dynasty]} 首</li>`;
-    }
-    statsHtml += "</ul>";
-    document.getElementById("stats-section").innerHTML = statsHtml;
+
+    const statsHtml = Object.entries(stats).map(([dynasty, count]) =>
+        `<li>${dynasty}: ${count} 首</li>`
+    ).join("");
+
+    document.getElementById("stats-section").innerHTML = `<h3>背诵进度（按朝代）</h3><ul>${statsHtml}</ul>`;
 }
 
-// 显示主题分布分析
+// 主题分布分析
 function getThemeDistribution() {
-    const recitedPoems = poems;
-    const themeStats = recitedPoems.reduce((acc, poem) => {
+    const themeStats = poems.reduce((acc, poem) => {
         poem.themes.forEach(theme => {
             acc[theme] = (acc[theme] || 0) + 1;
         });
         return acc;
     }, {});
-    let themeHtml = "<h3>背诵主题分布</h3><ul>";
-    for (const theme in themeStats) {
-        themeHtml += `<li>${theme}: ${themeStats[theme]} 首</li>`;
-    }
-    themeHtml += "</ul>";
-    document.getElementById("theme-stats-section").innerHTML = themeHtml;
+
+    const themeHtml = Object.entries(themeStats).map(([theme, count]) =>
+        `<li>${theme}: ${count} 首</li>`
+    ).join("");
+
+    document.getElementById("theme-stats-section").innerHTML = `<h3>背诵主题分布</h3><ul>${themeHtml}</ul>`;
 }
 
 document.addEventListener("DOMContentLoaded", loadData);
