@@ -53,3 +53,9 @@ button {
 button:hover {
     background-color: #45a049;
 }
+
+.clickable {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
