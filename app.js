@@ -10,7 +10,7 @@ async function loadData() {
         const authorResponse = await fetch('data/authors.json');
         authors = await authorResponse.json();
         
-        displayPoemList();
+        displayPoemList(poems);
         getRecitationStats();
         getThemeDistribution();
     } catch (error) {
@@ -20,28 +20,45 @@ async function loadData() {
 }
 
 // 显示诗词列表
-function displayPoemList() {
+function displayPoemList(filteredPoems) {
     const poemsList = document.getElementById("poems");
     poemsList.innerHTML = "";
-    poems.forEach(poem => {
+    filteredPoems.forEach(poem => {
         const li = document.createElement("li");
-        li.textContent = `${poem.title} - ${poem.author} (${poem.dynasty})`;
+        li.innerHTML = `${poem.title} - ${poem.author} (${poem.dynasty})`;
         li.onclick = () => showPoemDetails(poem);
         poemsList.appendChild(li);
     });
 }
 
-// 显示诗词详情及其关联信息
+// 显示诗词详情
 function showPoemDetails(poem) {
     const details = document.getElementById("poem-details");
     details.innerHTML = `
         <h2>${poem.title}</h2>
         <p><strong>作者：</strong><span class="clickable" onclick="showAuthorDetails('${poem.author}')">${poem.author}</span> (${poem.dynasty})</p>
-        <p>${poem.content}</p>
+        <p>${highlightText(poem.content, currentSearchTerm)}</p>
     `;
     showAuthorDetails(poem.author);
     showRelatedPoems(poem);
     details.hidden = false;
+}
+
+// 搜索并过滤诗词
+let currentSearchTerm = "";
+function searchPoems(term) {
+    currentSearchTerm = term;
+    const filteredPoems = poems.filter(poem => 
+        poem.content.includes(term) || poem.title.includes(term)
+    );
+    displayPoemList(filteredPoems);
+}
+
+// 高亮搜索关键词
+function highlightText(text, term) {
+    if (!term) return text;
+    const regex = new RegExp(`(${term})`, 'gi');
+    return text.replace(regex, '<span class="highlight">$1</span>');
 }
 
 // 显示诗人关系
