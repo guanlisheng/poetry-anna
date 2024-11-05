@@ -18,7 +18,7 @@ function displayPoemList() {
     poemsList.innerHTML = "";
     poems.forEach(poem => {
         const li = document.createElement("li");
-        li.textContent = `${poem.title} - ${poem.author}`;
+        li.textContent = `${poem.title} - ${poem.author} (${poem.dynasty})`;
         li.onclick = () => showPoemDetails(poem);
         poemsList.appendChild(li);
     });
