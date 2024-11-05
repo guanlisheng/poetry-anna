@@ -1,0 +1,18 @@
+[
+    {
+        "name": "李白",
+        "dynasty": "唐朝",
+        "related_authors": [
+            {"name": "杜甫", "relationship": "朋友"},
+            {"name": "王维", "relationship": "仰慕"}
+        ]
+    },
+    {
+        "name": "杜甫",
+        "dynasty": "唐朝",
+        "related_authors": [
+            {"name": "李白", "relationship": "朋友"},
+            {"name": "高适", "relationship": "朋友"}
+        ]
+    }
+]
