@@ -36,7 +36,7 @@ function showPoemDetails(poem) {
     const details = document.getElementById("poem-details");
     details.innerHTML = `
         <h2>${poem.title}</h2>
-        <p><strong>作者：</strong>${poem.author} (${poem.dynasty})</p>
+        <p><strong>作者：</strong><span class="clickable" onclick="showAuthorDetails('${poem.author}')">${poem.author}</span> (${poem.dynasty})</p>
         <p>${poem.content}</p>
     `;
     showAuthorDetails(poem.author);
@@ -45,15 +45,17 @@ function showPoemDetails(poem) {
 }
 
 // 显示诗人关系
-function showAuthorDetails(author) {
-    const authorData = authors.find(a => a.name === author);
+function showAuthorDetails(authorName) {
+    const authorData = authors.find(a => a.name === authorName);
+    const details = document.getElementById("poem-details");
+
     if (authorData) {
         let relationsHtml = "<h3>关系</h3><ul>";
         authorData.related_authors.forEach(rel => {
-            relationsHtml += `<li>${rel.relationship}: ${rel.name}</li>`;
+            relationsHtml += `<li>${rel.relationship}: <span class="clickable" onclick="showAuthorDetails('${rel.name}')">${rel.name}</span></li>`;
         });
         relationsHtml += "</ul>";
-        document.getElementById("poem-details").innerHTML += relationsHtml;
+        details.innerHTML += relationsHtml;
     }
 }
 
@@ -61,12 +63,20 @@ function showAuthorDetails(author) {
 function showRelatedPoems(poem) {
     if (poem.related_poems && poem.related_poems.length > 0) {
         let relatedHtml = "<h3>相似诗词</h3><ul>";
-        poem.related_poems.forEach(rp => {
-            relatedHtml += `<li>${rp}</li>`;
+        poem.related_poems.forEach(rpTitle => {
+            const relatedPoem = poems.find(p => p.title === rpTitle);
+            if (relatedPoem) {
+                relatedHtml += `<li><span class="clickable" onclick="showPoemDetails(findPoemByTitle('${relatedPoem.title}'))">${relatedPoem.title}</span></li>`;
+            }
         });
         relatedHtml += "</ul>";
         document.getElementById("poem-details").innerHTML += relatedHtml;
     }
+}
+
+// 帮助函数：按标题查找诗词
+function findPoemByTitle(title) {
+    return poems.find(poem => poem.title === title);
 }
 
 // 背诵进度分析
