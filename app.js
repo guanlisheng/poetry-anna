@@ -23,7 +23,7 @@ async function loadData() {
 function displayPoemList(filteredPoems) {
     const poemsList = document.getElementById("poems");
     poemsList.innerHTML = "";
-    filteredPoems.forEach(poem => {
+    poems.forEach((poem, index) => {
         const li = document.createElement("li");
         li.textContent = `${index + 1}. ${poem.title} - ${poem.author} (${poem.dynasty})`;
         li.onclick = () => showPoemDetails(poem);
