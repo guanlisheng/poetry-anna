@@ -34,10 +34,22 @@ function displayPoemList(filteredPoems) {
 // 显示诗词详情
 function showPoemDetails(poem) {
     const details = document.getElementById("poem-details");
-    details.innerHTML = `
+
+    // 将诗词内容按句分行，并在其中高亮搜索关键词
+    const formattedContent = poem.content
+        .split(/([，。])/g)  // 按逗号和句号分割内容
+        .map(line => line.trim())
+        .filter(line => line) // 去除空白项
+        .map(line => highlightText(line, currentSearchTerm))  // 高亮关键词
+        .join('<br>');  // 每句换行
+
+    details.innerHTML = ` 
         <h2>${poem.title}</h2>
-        <p><strong>作者：</strong><span class="clickable" onclick="showAuthorDetails('${poem.author}')">${poem.author}</span> (${poem.dynasty})</p>
-        <p>${highlightText(poem.content, currentSearchTerm)}</p>
+        <p><strong>作者：</strong>
+            <span class="clickable" onclick="showAuthorDetails('${poem.author}')">${poem.author}</span>
+            (${poem.dynasty})
+        </p>
+        <p>${formattedContent}</p>
     `;
     showAuthorDetails(poem.author);
     showRelatedPoems(poem);
