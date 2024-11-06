@@ -32,21 +32,27 @@
         "themes": ["豪放", "边塞"]
     },
     {
-        "title": "西江月",
+        "title": "西江月·夜行黄沙道中",
         "author": "辛弃疾",
         "dynasty": "宋",
-        "content": "明月别枝惊鹊，清风半夜鸣蝉。稻花香里说丰年，听取蛙声一片。\n七八个星天外，两三点雨山前。旧时茅店社林边，路转溪桥忽见。"
+        "content": "明月别枝惊鹊，清风半夜鸣蝉。稻花香里说丰年，听取蛙声一片。",
+        "themes": ["Rural Life", "Leisure", "Nature"],
+        "related_poems": ["鹿柴", "游山西村", "饮湖上初晴后雨"]
     },
     {
-        "title": "送朱大入秦",
+        "title": "送朱大人入秦",
         "author": "孟浩然",
         "dynasty": "唐",
-        "content": "游人五陵去，宝剑值千金。分手脱相赠，平生一片心。"
+        "content": "游人五陵去，宝剑值千金。分手脱相赠，平生一片心。",
+        "themes": ["Farewell", "Friendship", "Frontier/Long Journey"],
+        "related_poems": ["送元二使安西", "黄鹤楼送孟浩然之广陵", "别董大"]
     },
     {
         "title": "江上渔者",
         "author": "范仲淹",
         "dynasty": "宋",
-        "content": "江上往来人，但爱鲈鱼美。君看一叶舟，出没风波里。"
+        "content": "江上往来人，但爱鲈鱼美。君看一叶舟，出没风波里。",
+        "themes": ["Laborer’s Life", "Fisherman's Life", "Reflections on Life"],
+        "related_poems": ["江雪", "渭川田家", "归园田居"]
     }
 ]
