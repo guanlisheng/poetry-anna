@@ -35,12 +35,18 @@ function displayPoemList(filteredPoems) {
 function showPoemDetails(poem) {
     const details = document.getElementById("poem-details");
 
-    // 将诗词内容按句分行，并在其中高亮搜索关键词
+    // 按句分行显示，确保标点符号跟随在前一句之后
     const formattedContent = poem.content
-        .split(/([，。])/g)  // 按逗号和句号分割内容
-        .map(line => line.trim())
-        .filter(line => line) // 去除空白项
-        .map(line => highlightText(line, currentSearchTerm))  // 高亮关键词
+        .split(/(。|！|？)/g)  // 按逗号、句号、感叹号和问号分割内容
+        .reduce((acc, part, index, array) => {
+            // 将标点符号与前面的文字合并，避免单独分行
+            if (['。', '！', '？'].includes(part)) {
+                acc[acc.length - 1] += part; // 把符号添加到前一句
+            } else {
+                acc.push(highlightText(part.trim(), currentSearchTerm)); // 高亮并添加新句子
+            }
+            return acc;
+        }, [])
         .join('<br>');  // 每句换行
 
     details.innerHTML = ` 
