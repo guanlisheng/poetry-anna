@@ -30,4 +30,18 @@
             {"name": "杜牧", "relationship": "仰慕"}
         ]
     }
+    {
+        "name": "范仲淹",
+        "dynasty": "宋",
+        "related_authors": [
+            {
+                "name": "欧阳修",
+                "relationship": "朋友"
+            },
+            {
+                "name": "富弼",
+                "relationship": "好友"
+            }
+        ]
+    }
 ]
