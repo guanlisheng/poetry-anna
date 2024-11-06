@@ -4,55 +4,55 @@
         "author": "李白",
         "dynasty": "唐朝",
         "content": "床前明月光，疑是地上霜。举头望明月，低头思故乡。",
-        "related_poems": ["春晓"],
-        "themes": ["思乡", "月亮"]
+        "related_poems": ["春晓", "黄鹤楼送孟浩然之广陵"],
+        "themes": ["思乡", "月亮", "故乡"]
     },
     {
         "title": "春晓",
         "author": "孟浩然",
         "dynasty": "唐朝",
         "content": "春眠不觉晓，处处闻啼鸟。夜来风雨声，花落知多少。",
-        "related_poems": ["静夜思"],
-        "themes": ["春天", "晨景"]
+        "related_poems": ["静夜思", "宿建德江"],
+        "themes": ["春天", "晨景", "自然"]
     },
     {
         "title": "芙蓉楼送辛渐",
         "author": "王昌龄",
         "dynasty": "唐朝",
         "content": "寒雨连江夜入吴，平明送客楚山孤。洛阳亲友如相问，一片冰心在玉壶。",
-        "related_poems": ["送元二使安西"],
-        "themes": ["送别", "友情"]
+        "related_poems": ["送元二使安西", "黄鹤楼送孟浩然之广陵"],
+        "themes": ["送别", "友情", "坚贞"]
     },
     {
         "title": "马诗",
         "author": "李贺",
         "dynasty": "唐朝",
         "content": "大漠沙如雪，燕山月似钩。何当金络脑，快走踏清秋。",
-        "related_poems": ["凉州词"],
-        "themes": ["豪放", "边塞"]
+        "related_poems": ["凉州词", "从军行"],
+        "themes": ["豪放", "边塞", "将士豪情"]
     },
     {
         "title": "西江月·夜行黄沙道中",
         "author": "辛弃疾",
         "dynasty": "宋",
         "content": "明月别枝惊鹊，清风半夜鸣蝉。稻花香里说丰年，听取蛙声一片。",
-        "themes": ["Rural Life", "Leisure", "Nature"],
-        "related_poems": ["鹿柴", "游山西村", "饮湖上初晴后雨"]
+        "related_poems": ["鹿柴", "游山西村", "饮湖上初晴后雨"],
+        "themes": ["乡村生活", "闲适", "自然"]
     },
     {
         "title": "送朱大人入秦",
         "author": "孟浩然",
-        "dynasty": "唐",
+        "dynasty": "唐朝",
         "content": "游人五陵去，宝剑值千金。分手脱相赠，平生一片心。",
-        "themes": ["Farewell", "Friendship", "Frontier/Long Journey"],
-        "related_poems": ["送元二使安西", "黄鹤楼送孟浩然之广陵", "别董大"]
+        "related_poems": ["送元二使安西", "黄鹤楼送孟浩然之广陵", "别董大"],
+        "themes": ["送别", "友情", "边塞"]
     },
     {
         "title": "江上渔者",
         "author": "范仲淹",
-        "dynasty": "宋",
+        "dynasty": "宋朝",
         "content": "江上往来人，但爱鲈鱼美。君看一叶舟，出没风波里。",
-        "themes": ["Laborer’s Life", "Fisherman's Life", "Reflections on Life"],
-        "related_poems": ["江雪", "渭川田家", "归园田居"]
+        "related_poems": ["江雪", "渭川田家", "归园田居"],
+        "themes": ["劳动生活", "渔民生活", "人生感慨"]
     }
 ]
