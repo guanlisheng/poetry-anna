@@ -25,7 +25,7 @@ function displayPoemList(filteredPoems) {
     poemsList.innerHTML = "";
     filteredPoems.forEach(poem => {
         const li = document.createElement("li");
-        li.innerHTML = `${poem.title} - ${poem.author} (${poem.dynasty})`;
+        li.textContent = `${index + 1}. ${poem.title} - ${poem.author} (${poem.dynasty})`;
         li.onclick = () => showPoemDetails(poem);
         poemsList.appendChild(li);
     });
