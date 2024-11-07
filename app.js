@@ -144,4 +144,77 @@ function getThemeDistribution() {
     document.getElementById("theme-stats-section").innerHTML = `<h3>背诵主题分布</h3><ul>${themeHtml}</ul>`;
 }
 
+// 创建热力图数据
+function createHeatmapData() {
+    // 示例数据统计：统计每个主题及其出现次数
+    const themeCount = {};
+    poems.forEach(poem => {
+        poem.themes.forEach(theme => {
+            themeCount[theme] = (themeCount[theme] || 0) + 1;
+        });
+    });
+
+    // 转换为 ECharts 热力图所需格式
+    const heatmapData = Object.entries(themeCount).map(([theme, count]) => [theme, count]);
+    return heatmapData;
+}
+
+// 初始化热力图
+function createHeatmap() {
+    const chartDom = document.getElementById('heatmap');
+    const myChart = echarts.init(chartDom);
+
+    const option = {
+        title: {
+            text: '背诵主题分布热力图',
+            left: 'center'
+        },
+        tooltip: {
+            position: 'top'
+        },
+        xAxis: {
+            type: 'category',
+            data: createHeatmapData().map(item => item[0]),
+            splitArea: {
+                show: true
+            }
+        },
+        yAxis: {
+            type: 'value',
+            splitArea: {
+                show: true
+            }
+        },
+        visualMap: {
+            min: 0,
+            max: Math.max(...createHeatmapData().map(item => item[1])),
+            calculable: true,
+            orient: 'horizontal',
+            left: 'center',
+            bottom: '15%'
+        },
+        series: [{
+            name: '背诵主题',
+            type: 'heatmap',
+            data: createHeatmapData().map((item, index) => [index, 0, item[1]]),
+            label: {
+                show: true
+            },
+            emphasis: {
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }]
+    };
+
+    myChart.setOption(option);
+}
+
+// 调用加载数据和创建热力图
+loadData().then(() => {
+    createHeatmap();
+});
+
 document.addEventListener("DOMContentLoaded", loadData);
