@@ -159,62 +159,30 @@ function createHeatmapData() {
     return heatmapData;
 }
 
-// 初始化热力图
-function createHeatmap() {
-    const chartDom = document.getElementById('heatmap');
-    const myChart = echarts.init(chartDom);
+function createWordCloud() {
+    // 统计主题出现的次数
+    const themeCount = {};
+    poems.forEach(poem => {
+        poem.themes.forEach(theme => {
+            themeCount[theme] = (themeCount[theme] || 0) + 1;
+        });
+    });
 
-    const option = {
-        title: {
-            text: '背诵主题分布热力图',
-            left: 'center'
-        },
-        tooltip: {
-            position: 'top'
-        },
-        xAxis: {
-            type: 'category',
-            data: createHeatmapData().map(item => item[0]),
-            splitArea: {
-                show: true
-            }
-        },
-        yAxis: {
-            type: 'value',
-            splitArea: {
-                show: true
-            }
-        },
-        visualMap: {
-            min: 0,
-            max: Math.max(...createHeatmapData().map(item => item[1])),
-            calculable: true,
-            orient: 'horizontal',
-            left: 'center',
-            bottom: '15%'
-        },
-        series: [{
-            name: '背诵主题',
-            type: 'heatmap',
-            data: createHeatmapData().map((item, index) => [index, 0, item[1]]),
-            label: {
-                show: true
-            },
-            emphasis: {
-                itemStyle: {
-                    shadowBlur: 10,
-                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-                }
-            }
-        }]
-    };
+    // 转换为词云格式的数据
+    const wordCloudData = Object.entries(themeCount).map(([theme, count]) => [theme, count]);
 
-    myChart.setOption(option);
+    // 使用 wordcloud2.js 创建词云
+    WordCloud(document.getElementById('wordCloud'), {
+        list: wordCloudData,
+        gridSize: Math.round(16 * (window.innerWidth / 1024)), // 调整网格大小
+        weightFactor: 10, // 调整单词大小比例
+        fontFamily: 'Times, serif',
+        color: 'random-dark',
+        backgroundColor: '#f0f0f0'
+    });
 }
 
-// 调用加载数据和创建热力图
-loadData().then(() => {
-    createHeatmap();
-});
+// 加载数据后调用 createWordCloud
+loadData().then(createWordCloud);
 
 document.addEventListener("DOMContentLoaded", loadData);
