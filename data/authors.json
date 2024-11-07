@@ -1,7 +1,7 @@
 [
     {
         "name": "李白",
-        "dynasty": "唐朝",
+        "dynasty": "唐",
         "related_authors": [
             {"name": "杜甫", "relationship": "朋友"},
             {"name": "王维", "relationship": "仰慕"}
@@ -9,7 +9,7 @@
     },
     {
         "name": "杜甫",
-        "dynasty": "唐朝",
+        "dynasty": "唐",
         "related_authors": [
             {"name": "李白", "relationship": "朋友"},
             {"name": "高适", "relationship": "朋友"}
@@ -17,7 +17,7 @@
     },
     {
         "name": "王昌龄",
-        "dynasty": "唐朝",
+        "dynasty": "唐",
         "related_authors": [
             {"name": "李白", "relationship": "朋友"},
             {"name": "王之涣", "relationship": "好友"}
@@ -25,7 +25,7 @@
     },
     {
         "name": "李贺",
-        "dynasty": "唐朝",
+        "dynasty": "唐",
         "related_authors": [
             {"name": "杜牧", "relationship": "仰慕"}
         ]

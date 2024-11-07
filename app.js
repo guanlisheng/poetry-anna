@@ -159,30 +159,4 @@ function createHeatmapData() {
     return heatmapData;
 }
 
-function createWordCloud() {
-    // 统计主题出现的次数
-    const themeCount = {};
-    poems.forEach(poem => {
-        poem.themes.forEach(theme => {
-            themeCount[theme] = (themeCount[theme] || 0) + 1;
-        });
-    });
-
-    // 转换为词云格式的数据
-    const wordCloudData = Object.entries(themeCount).map(([theme, count]) => [theme, count]);
-
-    // 使用 wordcloud2.js 创建词云
-    WordCloud(document.getElementById('wordCloud'), {
-        list: wordCloudData,
-        gridSize: Math.round(16 * (window.innerWidth / 1024)), // 调整网格大小
-        weightFactor: 10, // 调整单词大小比例
-        fontFamily: 'Times, serif',
-        color: 'random-dark',
-        backgroundColor: '#f0f0f0'
-    });
-}
-
-// 加载数据后调用 createWordCloud
-loadData().then(createWordCloud);
-
 document.addEventListener("DOMContentLoaded", loadData);
